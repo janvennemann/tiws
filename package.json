@@ -12,6 +12,14 @@
     "titanium"
   ],
   "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/janvennemann/tiws.git"
+  },
+  "bugs": {
+    "url": "https://github.com/janvennemann/tiws/issues"
+  },
+  "homepage": "https://github.com/janvennemann/tiws/tree/main/#readme",
   "files": [
     "src"
   ],
