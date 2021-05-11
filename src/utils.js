@@ -21,8 +21,27 @@ function applyMask(source, mask, output, offset, length) {
   }
 }
 
+function toBuffer(data) {
+  if (Buffer.isBuffer(data)) {
+    return data;
+  }
+
+  let buf;
+
+  if (data instanceof ArrayBuffer) {
+    buf = Buffer.from(data);
+  } else if (ArrayBuffer.isView(data)) {
+    buf = Buffer.from(data.buffer, data.byteOffset, data.byteLength);
+  } else {
+    buf = Buffer.from(data);
+  }
+
+  return buf;
+}
+
 module.exports = {
   randomBytes,
   randomFillSync,
-  applyMask
+  applyMask,
+  toBuffer
 };

@@ -262,7 +262,7 @@ class WebSocket extends EventEmiter {
       ...options
     };
 
-    this.sender.send(data, opts, cb);
+    this.sender.send(data || EMPTY_BUFFER, opts, cb);
   }
 
   close(code, reason) {

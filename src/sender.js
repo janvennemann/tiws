@@ -5,7 +5,7 @@ const {
   OpcodePong,
   OpcodeTextFrame
 } = require('./constants')
-const { randomFillSync, applyMask } = require('./utils');
+const { randomFillSync, applyMask, toBuffer } = require('./utils');
 
 const mask = Buffer.alloc(4);
 
@@ -92,7 +92,7 @@ class Sender {
    * @return {Buffer}
    */
   createFrameBuffer(options) {
-    const data = options.data;
+    const data = toBuffer(options.data);
     let offset = 6;
     let payloadLength = data.length;
 
