@@ -325,7 +325,10 @@ class WebSocket extends EventEmiter {
   }
 
   processHandshake(buffer) {
-    const response = buffer.toString();
+    const httpFrameEnd = buffer.indexOf('\r\n\r\n')
+    const response = buffer.slice(0, httpFrameEnd + 4).toString()
+    const restBuffer = buffer.slice(httpFrameEnd + 4)
+
     if (response.indexOf('HTTP/1.1 101') === -1) {
       abortHandshake(this, 'Invalid HTTP status code received during WebSocket hanshake.');
       return;
@@ -345,8 +348,11 @@ class WebSocket extends EventEmiter {
     }
 
     this.readyState = WebSocket.OPEN;
-
     this.emitEvent('open');
+
+    if (restBuffer.length) {
+      this.processDataFramesInBuffer(restBuffer)
+    }
   }
 
   processInputStream(e) {
