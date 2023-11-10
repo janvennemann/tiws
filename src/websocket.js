@@ -166,7 +166,7 @@ class WebSocket extends EventEmiter {
       Upgrade: 'websocket',
       ...opts.headers
     };
-    opts.path = parsedUrl.pathname + parsedUrl.search;
+    opts.path = parsedUrl.pathname + (parsedUrl.search || '');
     opts.timeout = opts.handshakeTimeout;
 
     if (opts.perMessageDeflate) {
